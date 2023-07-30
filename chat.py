@@ -25,12 +25,11 @@ active_loop_data_set_path = os.environ.get('DEEPLAKE_DATASET_PATH')
 # Load embeddings and DeepLake database
 def load_embeddings_and_database(active_loop_data_set_path):
     embeddings = OpenAIEmbeddings()
-    db = DeepLake(
+    return DeepLake(
         dataset_path=active_loop_data_set_path,
         read_only=True,
-        embedding_function=embeddings
+        embedding_function=embeddings,
     )
-    return db
 
 # Transcribe audio using OpenAI Whisper API
 def transcribe_audio(audio_file_path, openai_key):
@@ -88,7 +87,7 @@ def search_db(user_input, db):
 # Display conversation history using Streamlit messages
 def display_conversation(history):
     for i in range(len(history["generated"])):
-        message(history["past"][i], is_user=True, key=str(i) + "_user")
+        message(history["past"][i], is_user=True, key=f"{str(i)}_user")
         message(history["generated"][i],key=str(i))
         #Voice using Eleven API
         voice= "Bella"
