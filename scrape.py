@@ -90,9 +90,7 @@ def split_docs(docs):
 def load_vectors_into_deeplake(dataset_path, source_chunks):
     # Initialize the DeepLake database with the dataset path and embedding function
     deeplake_db = DeepLake(dataset_path=dataset_path, embedding_function=embeddings)
-    # Add the text chunks to the database
-    deeplakedb=deeplake_db.add_texts(source_chunks)
-    return deeplakedb
+    return deeplake_db.add_texts(source_chunks)
 
 
 # Define the main function
